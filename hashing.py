@@ -15,4 +15,6 @@ def sha512(plainText):
     
     return hashlib.sha512(plainText.encode()).hexdigest()
 
- 
+def md5(plainText):
+    
+    return hashlib.md5(plainText.encode()).hexdigest()
