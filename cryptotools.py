@@ -3,7 +3,7 @@
 
 import argparse, logging, sys
 import clipboard
-import hashing, encoding, encryption
+from functions import hashing, encoding, encryption
 
 def check_args(_agrs=None):
     
