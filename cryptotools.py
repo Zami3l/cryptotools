@@ -10,22 +10,30 @@ def check_args(_agrs=None):
     # Init Argparse
     parser = argparse.ArgumentParser(description='Cryptotools')
     
-    parser.add_argument('-sha1', action="store_true", help="Use sha1 hash algorithmn")
-    parser.add_argument('-sha256', action="store_true", help="Use sha256 hash algorithmn")
-    parser.add_argument('-sha512', action="store_true", help="Use sha512 hash algorithmn")
-    parser.add_argument('-md5', action="store_true", help="Use md5 hash algorithmn")
-    parser.add_argument('-b16', action="store_true", help="Encode with base 16")
-    parser.add_argument('-b32', action="store_true", help="Encode with base 32")
-    parser.add_argument('-b64', action="store_true", help="Encode with base 64")
-    parser.add_argument('-rot13', action="store_true", help="Encryption Caesar")
-    parser.add_argument('-xor', action="store_true", help="Encryption xor")
-    parser.add_argument('-c', '--clip', action="store_true", help="Copy to clipboard")
-    parser.add_argument('-k', '--key', type=str, metavar='key', help="Key for encryption")
-    parser.add_argument('-up', '--upper', action="store_true", help="Result with uppercase")
-    parser.add_argument('-hid', '--hidden', action="store_true", help="Hidden result")
-    parser.add_argument('-v', '--verbose', action='store_true', help="Mode verbose")
-    parser.add_argument('-d', '--debug', action='store_true', help="Mode debug")
     parser.add_argument('text', type=str, metavar='text', help="Text for Encode/Hash")
+
+    encoding = parser.add_argument_group(title='Encoding')
+    encoding.add_argument('-b16', action="store_true", help="Encode with base 16")
+    encoding.add_argument('-b32', action="store_true", help="Encode with base 32")
+    encoding.add_argument('-b64', action="store_true", help="Encode with base 64")
+
+    hashing = parser.add_argument_group(title='Hashing')
+    hashing.add_argument('-sha1', action="store_true", help="Use sha1 hash algorithmn")
+    hashing.add_argument('-sha256', action="store_true", help="Use sha256 hash algorithmn")
+    hashing.add_argument('-sha512', action="store_true", help="Use sha512 hash algorithmn")
+    hashing.add_argument('-md5', action="store_true", help="Use md5 hash algorithmn")
+
+    encryption = parser.add_argument_group(title='Encryption')
+    encryption.add_argument('-rot13', action="store_true", help="Encryption Caesar")
+    encryption.add_argument('-xor', action="store_true", help="Encryption xor")
+    encryption.add_argument('-k', '--key', required='-xor', type=str, metavar='KEY', help="Key for encryption")
+
+    optional = parser.add_argument_group(title='Other')
+    optional.add_argument('-c', '--clip', action="store_true", help="Copy to clipboard")
+    optional.add_argument('-up', '--upper', action="store_true", help="Result with uppercase")
+    optional.add_argument('-hid', '--hidden', action="store_true", help="Hidden result")
+    optional.add_argument('-v', '--verbose', action='store_true', help="Mode verbose")
+    optional.add_argument('-d', '--debug', action='store_true', help="Mode debug")
 
     args = parser.parse_args()
     
