@@ -42,13 +42,11 @@ class Shift_Cipher:
 
 class Xor_Cipher():
 
-    def str(self, plainText, key):
-
-        plainText = bytearray(plainText, 'utf-8')
-
-        for index in range(len(plainText)):
-            plainText[index] ^= ord(key[index%len(key)])
+    def xor(self, plainText, key):
         
-        cipherText = plainText.decode('utf-8')
+        cipherText = bytearray(plainText)
 
+        for index in range(len(cipherText)):
+            cipherText[index] ^= ord(key[index%len(key)])
+        
         return cipherText
