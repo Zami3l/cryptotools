@@ -29,29 +29,29 @@ def check_args(_agrs=None):
     encryption = parser.add_argument_group(title='Encryption')
     encryption.add_argument('--rot13', action="store_true", help="Encryption Caesar")
     encryption.add_argument('--xor', action="store_true", help="Encryption xor")
-    encryption.add_argument('--key', required='-xor' in sys.argv, metavar='KEY', help="Key for encryption")
+    encryption.add_argument('--key', required='--xor' in sys.argv, metavar='KEY', help="Key for encryption")
 
     optional = parser.add_argument_group(title='Other')
     optional.add_argument('--clip', action="store_true", help="Copy to clipboard")
-    optional.add_argument('--upper', action="store_true", help="Result with uppercase")
+    optional.add_argument('--upper', action="store_true", help="View the result with uppercase")
     optional.add_argument('--view', action="store_true", help="View result")
     optional.add_argument('--verbose', action='store_true', help="Mode verbose")
     optional.add_argument('--debug', action='store_true', help="Mode debug")
 
     args = parser.parse_args()
-    
+
     return args
 
 def action(mode):
 
     # Input
     if mode.text is not None:
-
-        data = mode.text
-
+        
+        data = mode.text.encode('utf8')
+       
     elif mode.file is not None:
 
-        data = tools.read(mode.file)
+        data = tools.readb(mode.file)
 
     # Hashing
     if mode.sha1:
@@ -75,7 +75,7 @@ def action(mode):
 
     if mode.b64:
         result = encoding.b64(data)
-
+    
     # Encryption
     if mode.rot13:
         result = encryption.Shift_Cipher().ascii_letter(data, 13, 1)
@@ -83,21 +83,21 @@ def action(mode):
     if mode.xor:
         result = encryption.Xor_Cipher().xor(data, mode.key)
 
-    # Uppercase result
-    if mode.upper:
-        result = result.upper()
-
     # View result
     if mode.view:
-        print(result)
+        # Uppercase result
+        if mode.upper:
+            print(result.decode('utf8').upper())
+        else:
+            print(result.decode('utf8'))
 
     # Copy result
     if mode.clip:
-        clipboard.copy(result)
+        clipboard.copy(result.decode('utf8'))
 
     # Output
     if mode.output is not None:
-        tools.write(result, mode.output)
+        tools.writeb(result, mode.output)
 
 def main():
 
