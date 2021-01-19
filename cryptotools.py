@@ -13,7 +13,7 @@ def check_args(_agrs=None):
     typeGroup = parser.add_mutually_exclusive_group()
     typeGroup.add_argument('--text', metavar='TEXT', help="Text for Encode/Hash/Encrypt")
     typeGroup.add_argument('--file', metavar='FILE', help="File for Encode/Hash/Encrypt")
-    parser.add_argument('--output', metavar='OUTPUT', required='--file' in sys.argv, help="File output")
+    parser.add_argument('--output', metavar='OUTPUT', help="File output")
 
     encoding = parser.add_argument_group(title='Encoding')
     encoding.add_argument('--b16', action="store_true", help="Encode with base 16")
