@@ -3,7 +3,7 @@
 
 import argparse, logging, sys
 import clipboard
-from functions import hashing, encoding, encryption, tools
+from functions import hashing, hashing_custom, encoding, encryption, tools
 
 def check_args(_agrs=None):
     
@@ -25,6 +25,7 @@ def check_args(_agrs=None):
     hashing.add_argument('--sha256', action="store_true", help="Use sha256 hash algorithmn")
     hashing.add_argument('--sha512', action="store_true", help="Use sha512 hash algorithmn")
     hashing.add_argument('--md5', action="store_true", help="Use md5 hash algorithmn")
+    hashing.add_argument('--test', action="store_true", help="Test hashing")
 
     encryption = parser.add_argument_group(title='Encryption')
     encryption.add_argument('--rot13', action="store_true", help="Encryption Caesar")
@@ -51,7 +52,7 @@ def action(mode):
        
     elif mode.file is not None:
 
-        data = tools.readb(mode.file)
+        data = tools.read(mode.file)
 
     # Hashing
     if mode.sha1:
@@ -65,6 +66,9 @@ def action(mode):
     
     if mode.md5:
         result = hashing.md5(data)
+    
+    if mode.test:
+        result = hashing_custom.Hash_Custom("functions/conf.toml").exec(data)
     
     # Encoding
     if mode.b16:
@@ -97,7 +101,7 @@ def action(mode):
 
     # Output
     if mode.output is not None:
-        tools.writeb(result, mode.output)
+        tools.write(result, mode.output)
 
 def main():
 
