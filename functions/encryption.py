@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 # coding : utf-8
 
-
 class Shift_Cipher:
 
     def ascii_letter(self, plainText, shift, repetition):
@@ -10,7 +9,7 @@ class Shift_Cipher:
 
             cipherText = []
 
-            for ror in plainText:
+            for ror in plainText.decode('utf-8'):
                 
                 #Lowercase
                 if ror.islower():
@@ -24,8 +23,7 @@ class Shift_Cipher:
                 else:
                     cipherText.append(ror)
 
-        return ''.join(cipherText)
-
+        return ''.join(cipherText).encode('utf-8')
 
     def ascii_extented(self, plainText, shift, repetition):
         
@@ -33,12 +31,11 @@ class Shift_Cipher:
 
             cipherText = []
 
-            for ror in plainText:
+            for ror in plainText.decode('utf-8'):
 
                 cipherText.append(chr((ord(ror)+(shift+index))%256))
 
-        return ''.join(cipherText)
-
+        return ''.join(cipherText).encode('utf-8')
 
 class Xor_Cipher():
 

@@ -28,9 +28,12 @@ def check_args(_agrs=None):
     hashing.add_argument('--test', action="store_true", help="Test hashing")
 
     encryption = parser.add_argument_group(title='Encryption')
-    encryption.add_argument('--rot13', action="store_true", help="Encryption Caesar")
+    encryption.add_argument('--rot13', action="store_true", help="Encryption ROT13")
+    encryption.add_argument('--caesar', action="store_true", help="Encryption Caesar")
     encryption.add_argument('--xor', action="store_true", help="Encryption xor")
-    encryption.add_argument('--key', required='--xor' in sys.argv, metavar='KEY', help="Key for encryption")
+
+    encryption.add_argument('--key', metavar='KEY', help="Key for encryption")
+    encryption.add_argument('--shift', metavar='NUMBER', type=int, help="Number for shift")
 
     optional = parser.add_argument_group(title='Other')
     optional.add_argument('--clip', action="store_true", help="Copy to clipboard")
