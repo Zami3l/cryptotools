@@ -24,9 +24,11 @@ Hashing:
   --test           Test hashing
 
 Encryption:
-  --rot13          Encryption Caesar
+  --rot13          Encryption ROT13
+  --caesar         Encryption Caesar
   --xor            Encryption xor
   --key KEY        Key for encryption
+  --shift NUMBER   Number for shift
 
 Other:
   --clip           Copy to clipboard
@@ -34,7 +36,7 @@ Other:
   --view           View result
   --verbose        Mode verbose
   --debug          Mode debug
-```
+  ```
 
 # Examples
 ## Text
