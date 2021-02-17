@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # coding : utf-8
 
+import sys
 from functions import hashing, hashing_custom, encoding, encryption, tools 
 
 def action(mode):
@@ -41,7 +42,6 @@ def action(mode):
         result = encoding.b64(data)
     
     # Encryption
-    print(data)
     if mode.rot13:
         result = encryption.Shift_Cipher().ascii_letter(data, 13, 1)
 
@@ -75,4 +75,4 @@ def action(mode):
 
 def missing(arg, argsRequired):
 
-    print("The following arguments are required with {}: {}".format(arg, argsRequired))
+    sys.exit("The following arguments are required with {}: {}".format(arg, argsRequired))
