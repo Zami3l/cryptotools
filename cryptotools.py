@@ -48,11 +48,16 @@ def check_args(_agrs=None):
 
 def main():
 
+    sysargs = check_args(sys.argv[1:])
+
     # Init Logger
     logger = logging.getLogger()
     logging.basicConfig(format='%(levelname)s :: %(message)s')
 
-    sysargs = check_args(sys.argv[1:])
+    if sysargs.verbose:
+        logger.setLevel(logging.INFO)
+    if sysargs.debug:
+        logger.setLevel(logging.DEBUG)
 
     # Run
     args.action(sysargs)

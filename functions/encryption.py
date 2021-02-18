@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # coding : utf-8
 
+import logging
+
 class Shift_Cipher:
 
     def ascii_letter(self, plainText, shift, repetition):
@@ -23,6 +25,8 @@ class Shift_Cipher:
                 else:
                     cipherText.append(ror)
 
+            logging.info('#%d : %s', index+1, ''.join(cipherText))
+
         return ''.join(cipherText).encode('utf-8')
 
     def ascii_extented(self, plainText, shift, repetition):
@@ -34,6 +38,8 @@ class Shift_Cipher:
             for ror in plainText.decode('utf-8'):
 
                 cipherText.append(chr((ord(ror)+(shift+index))%256))
+
+            logging.info('#%d : %s', index+1, ''.join(cipherText))
 
         return ''.join(cipherText).encode('utf-8')
 
