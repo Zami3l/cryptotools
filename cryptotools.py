@@ -29,11 +29,12 @@ def check_args(_agrs=None):
 
     encryption = parser.add_argument_group(title='Encryption')
     encryption.add_argument('--rot13', action="store_true", help="Encryption ROT13")
-    encryption.add_argument('--caesar', action="store_true", help="Encryption Caesar")
+    encryption.add_argument('--caesar', metavar='TYPE', choices=['letter', 'ascii'], help="Encryption Caesar (Select letter or ascii)")
     encryption.add_argument('--xor', action="store_true", help="Encryption xor")
 
     encryption.add_argument('--key', metavar='KEY', help="Key for encryption")
     encryption.add_argument('--shift', metavar='NUMBER', type=int, help="Number for shift")
+    encryption.add_argument('--repeat', metavar='NUMBER', type=int, default=1, help="Number for repetition shift")
 
     optional = parser.add_argument_group(title='Other')
     optional.add_argument('--clip', action="store_true", help="Copy to clipboard")

@@ -49,7 +49,10 @@ def action(mode):
         if mode.shift is None:
             missing('caesar', '--shift NUMBER')
         else:
-            result = encryption.Shift_Cipher().ascii_letter(data, mode.shift, 1)
+            if mode.caesar == 'letter':
+                result = encryption.Shift_Cipher().ascii_letter(data, mode.shift, mode.repeat)
+            if mode.caesar == 'ascii':
+                result = encryption.Shift_Cipher().ascii_extented(data, mode.shift, mode.repeat)
     
     if mode.xor:
         if mode.key is None:
