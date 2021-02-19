@@ -32,9 +32,10 @@ def check_args(_agrs=None):
     encryption.add_argument('--caesar', metavar='TYPE', choices=['letter', 'ascii'], help="Encryption Caesar (Select letter or ascii)")
     encryption.add_argument('--xor', action="store_true", help="Encryption xor")
 
-    encryption.add_argument('--key', metavar='KEY', help="Key for encryption")
-    encryption.add_argument('--shift', metavar='NUMBER', type=int, help="Number for shift")
-    encryption.add_argument('--repeat', metavar='NUMBER', type=int, default=1, help="Number for repetition shift")
+    encryption_sub = parser.add_argument_group(title='Encryption - Sub args')
+    encryption_sub.add_argument('--key', metavar='KEY', help="Key for encryption")
+    encryption_sub.add_argument('--shift', metavar='NUMBER', type=int, help="Number for shift")
+    encryption_sub.add_argument('--repeat', metavar='NUMBER', type=int, default=1, help="Number for repetition shift")
 
     optional = parser.add_argument_group(title='Other')
     optional.add_argument('--clip', action="store_true", help="Copy to clipboard")
