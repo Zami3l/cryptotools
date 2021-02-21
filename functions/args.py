@@ -32,13 +32,13 @@ def action(mode):
         result = hashing_custom.Hash_Custom("functions/conf.toml").exec(data)
     
     # Encoding
-    if mode.b16:
+    if mode.base16:
         result = encoding.b16(data)
     
-    if mode.b32:
+    if mode.base32:
         result = encoding.b32(data)
 
-    if mode.b64:
+    if mode.base64:
         result = encoding.b64(data)
     
     # Encryption
@@ -56,7 +56,7 @@ def action(mode):
     
     if mode.xor:
         if mode.key is None:
-            missing('xor', '--key KEY')
+            missing('xor', '-k / --key KEY')
         else:
             result = encryption.Xor_Cipher().xor(data, mode.key)
 
