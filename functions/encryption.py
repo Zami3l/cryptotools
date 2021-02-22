@@ -2,6 +2,7 @@
 # coding : utf-8
 
 import logging
+from functions.tools import letter_position, case_letter
 
 class Shift_Cipher:
 
@@ -52,4 +53,33 @@ class Xor_Cipher():
         for index in range(len(cipherText)):
             cipherText[index] ^= ord(key[index%len(key)])
         
+        return cipherText
+
+
+class Substitution_Cipher():
+
+    def ascii_letter(self, plainText, key):
+
+        cipherText = bytearray(len(plainText))
+        iShift, iKey = 0, 0 # Si le plainText contient un caractère spécial il faut revenir à l'index précédent
+
+        for iLetter in plainText:
+
+            shiftLetter = (letter_position(iLetter) + letter_position(key[(iKey - iShift) % len(key)])) % 26
+
+            if case_letter(iLetter) == 'lowercase':
+
+                cipherText.append(shiftLetter + 97)
+
+            elif case_letter(iLetter) == 'uppercase':
+
+                cipherText.append(shiftLetter + 65)
+
+            else:
+
+                cipherText.append(iLetter)
+                iShift += 1
+
+            iKey += 1
+
         return cipherText

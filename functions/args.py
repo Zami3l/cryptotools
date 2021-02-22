@@ -42,6 +42,9 @@ def action(mode):
         result = encoding.b64(data)
     
     # Encryption
+    if mode.key is not None:
+        key = mode.key.encode('utf-8')
+
     if mode.rot13:
         result = encryption.Shift_Cipher().ascii_letter(data, 13, 1)
 
@@ -54,6 +57,15 @@ def action(mode):
             if mode.caesar == 'ascii':
                 result = encryption.Shift_Cipher().ascii_extented(data, mode.shift, mode.repeat)
     
+    if mode.vigenere:
+        if mode.key is None:
+            missing('key', '-k, --key KEY')
+        else:
+            if mode.vigenere == 'letter':
+                result = encryption.Substitution_Cipher().ascii_letter(data, key)
+            if mode.vigenere == 'ascii':
+                result = encryption.Substitution_Cipher().ascii_extented(data, key)
+
     if mode.xor:
         if mode.key is None:
             missing('xor', '-k / --key KEY')

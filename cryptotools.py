@@ -3,7 +3,7 @@
 
 import argparse, logging, sys
 import clipboard
-from functions import args
+from functions import args 
 
 def check_args(_agrs=None):
     
@@ -30,6 +30,7 @@ def check_args(_agrs=None):
     encryption = parser.add_argument_group(title='Encryption')
     encryption.add_argument('-rot13', '--rot13', action="store_true", help="Encryption ROT13")
     encryption.add_argument('-caesar', '--caesar', metavar='TYPE', choices=['letter', 'ascii'], help="Encryption Caesar (Select letter or ascii)")
+    encryption.add_argument('-vigenere', '--vigenere', metavar='TYPE', choices=['letter', 'ascii'], help="Encryption Vigenere (Select letter or ascii)")
     encryption.add_argument('-xor', '--xor', action="store_true", help="Encryption xor")
 
     encryption_sub = parser.add_argument_group(title='Encryption - Sub args')
