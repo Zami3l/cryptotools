@@ -51,7 +51,8 @@ class Xor_Cipher():
         cipherText = bytearray(plainText)
 
         for index in range(len(cipherText)):
-            cipherText[index] ^= ord(key[index%len(key)])
+
+            cipherText[index] ^= key[index%len(key)]
         
         return cipherText
 

@@ -70,7 +70,7 @@ def action(mode):
         if mode.key is None:
             missing('xor', '-k / --key KEY')
         else:
-            result = encryption.Xor_Cipher().xor(data, mode.key)
+            result = encryption.Xor_Cipher().xor(data, key)
 
     # View result
     if mode.view:
