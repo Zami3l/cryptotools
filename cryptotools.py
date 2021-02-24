@@ -13,6 +13,7 @@ def check_args(_agrs=None):
     typeGroup = parser.add_mutually_exclusive_group()
     typeGroup.add_argument('-t', '--text', metavar='TEXT', help="Text for Encode/Hash/Encrypt")
     typeGroup.add_argument('-f', '--file', metavar='FILE', help="File for Encode/Hash/Encrypt")
+    typeGroup.add_argument('-p', '--pwd', action="store_true", help="Text without echo for Encode/Hash/Encrypt")
     parser.add_argument('-o', '--output', metavar='OUTPUT', help="File output")
 
     encoding = parser.add_argument_group(title='Encoding')

@@ -3,6 +3,7 @@
 
 import sys
 from functions import hashing, hashing_custom, encoding, encryption, tools 
+import getpass
 
 def action(mode):
 
@@ -14,6 +15,10 @@ def action(mode):
     elif mode.file is not None:
 
         data = tools.read(mode.file)
+    
+    elif mode.pwd:
+
+        data = getpass.getpass("> ").encode('utf-8')
 
     # Hashing
     if mode.sha1:
