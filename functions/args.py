@@ -79,6 +79,12 @@ def action(mode):
         else:
             result = encryption.Xor_Cipher().xor(data, key)
 
+    if mode.rc4:
+        if mode.key is None:
+            missing('xor', '-k / --key KEY')
+        else:
+            result = encryption.RC4().cipher(data, key)
+
     # View result
     if mode.view:
         # Uppercase result

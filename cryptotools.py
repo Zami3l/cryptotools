@@ -33,6 +33,7 @@ def check_args(_agrs=None):
     encryption.add_argument('-caesar', '--caesar', metavar='TYPE', choices=['letter', 'ascii'], help="Encryption Caesar (Select letter or ascii)")
     encryption.add_argument('-vigenere', '--vigenere', metavar='TYPE', choices=['letter', 'ascii'], help="Encryption Vigenere (Select letter or ascii)")
     encryption.add_argument('-xor', '--xor', action="store_true", help="Encryption xor")
+    encryption.add_argument('-rc4', '--rc4', action="store_true", help="Encryption RC4")
 
     encryption_sub = parser.add_argument_group(title='Encryption - Sub args')
     encryption_sub.add_argument('-k', '--key', metavar='KEY', help="Key for encryption")
