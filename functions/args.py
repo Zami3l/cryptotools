@@ -4,6 +4,8 @@
 import sys
 from functions import hashing, hashing_custom, encoding, encryption, tools 
 import getpass
+from functions.color import red
+from colored import stylize
 
 def action(mode):
 
@@ -95,4 +97,4 @@ def action(mode):
 
 def missing(arg, argsRequired):
 
-    sys.exit("The following arguments are required with {}: {}".format(arg, argsRequired))
+    sys.exit(stylize("The following arguments are required with {}: {}", red).format(arg, argsRequired))
