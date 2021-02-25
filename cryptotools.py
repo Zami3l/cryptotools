@@ -15,6 +15,7 @@ def check_args(_agrs=None):
     typeGroup.add_argument('-f', '--file', metavar='FILE', help="File for Encode/Hash/Encrypt")
     typeGroup.add_argument('-p', '--pwd', action="store_true", help="Text without echo for Encode/Hash/Encrypt")
     parser.add_argument('-o', '--output', metavar='OUTPUT', help="File output")
+    parser.add_argument('-type', '--type', metavar='TYPE', choices=['e', 'd'], default='e', help="Select encrypt/encode or decrypt/decode for encryption/encoding")
 
     encoding = parser.add_argument_group(title='Encoding')
     encoding.add_argument('-b16', '--base16', action="store_true", help="Encode with base 16")
