@@ -12,7 +12,7 @@ def action(mode):
     # Input
     if mode.input is not None:
         
-        data = mode.text.encode('utf8')
+        data = mode.input.encode('utf8')
        
     elif mode.file is not None:
 
