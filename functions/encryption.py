@@ -61,7 +61,7 @@ class Substitution_Cipher():
 
     def ascii_letter(self, plainText, key):
 
-        cipherText = bytearray(len(plainText))
+        cipherText = bytearray()
         iShift, iKey = 0, 0 # Si le plainText contient un caractère spécial il faut revenir à l'index précédent
 
         for iLetter in plainText:
