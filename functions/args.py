@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # coding : utf-8
 
-import sys
+import sys, unittest
 from functions import hashing, hashing_custom, encoding, encryption, tools 
 import getpass
 from functions.color import red
@@ -10,7 +10,7 @@ from colored import stylize
 def action(mode):
 
     # Input
-    if mode.text is not None:
+    if mode.input is not None:
         
         data = mode.text.encode('utf8')
        
@@ -72,7 +72,7 @@ def action(mode):
     if mode.md5:
         data = hashing.md5(data)
     
-    if mode.test:
+    if mode.custom:
         data = hashing_custom.Hash_Custom("functions/conf.toml").exec(data)
     
     # Encoding
@@ -103,6 +103,10 @@ def action(mode):
     # Output
     if mode.output is not None:
         tools.write(data, mode.output)
+
+    if mode.test:
+        suite = unittest.TestLoader().discover("tests")
+        result = unittest.TextTestRunner(verbosity=2).run(suite)
 
 def missing(arg, argsRequired):
 

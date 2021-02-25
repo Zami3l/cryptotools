@@ -11,7 +11,7 @@ def check_args(_agrs=None):
     parser = argparse.ArgumentParser(description='Cryptotools')
 
     typeGroup = parser.add_mutually_exclusive_group()
-    typeGroup.add_argument('-t', '--text', metavar='TEXT', help="Text for Encode/Hash/Encrypt")
+    typeGroup.add_argument('-i', '--input', metavar='INPUT', help="Text for Encode/Hash/Encrypt")
     typeGroup.add_argument('-f', '--file', metavar='FILE', help="File for Encode/Hash/Encrypt")
     typeGroup.add_argument('-p', '--pwd', action="store_true", help="Text without echo for Encode/Hash/Encrypt")
     parser.add_argument('-o', '--output', metavar='OUTPUT', help="File output")
@@ -27,7 +27,7 @@ def check_args(_agrs=None):
     hashing.add_argument('-sha256', '--sha256', action="store_true", help="Use sha256 hash algorithmn")
     hashing.add_argument('-sha512', '--sha512', action="store_true", help="Use sha512 hash algorithmn")
     hashing.add_argument('-md5', '--md5', action="store_true", help="Use md5 hash algorithmn")
-    hashing.add_argument('-test', '--test', action="store_true", help="Test hashing")
+    hashing.add_argument('-custom', '--custom', action="store_true", help="Test hashing")
 
     encryption = parser.add_argument_group(title='Encryption')
     encryption.add_argument('-rot13', '--rot13', action="store_true", help="Encryption ROT13")
@@ -42,6 +42,7 @@ def check_args(_agrs=None):
     encryption_sub.add_argument('-repeat', '--repeat', metavar='NUMBER', type=int, default=1, help="Number for repetition shift")
 
     optional = parser.add_argument_group(title='Other')
+    optional.add_argument('-t', '--test', action="store_true", help="Run unit testing")
     optional.add_argument('-c', '--clip', action="store_true", help="Copy to clipboard")
     optional.add_argument('-up', '--upper', action="store_true", help="View the result with uppercase")
     optional.add_argument('-v', '--view', action="store_true", help="View result")
