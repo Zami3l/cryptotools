@@ -20,6 +20,7 @@ def check_args(_agrs=None):
     encoding.add_argument('-b16', '--base16', action="store_true", help="Encode with base 16")
     encoding.add_argument('-b32', '--base32', action="store_true", help="Encode with base 32")
     encoding.add_argument('-b64', '--base64', action="store_true", help="Encode with base 64")
+    encoding.add_argument('-hex', '--hex', action="store_true", help="Encode hex")
 
     hashing = parser.add_argument_group(title='Hashing')
     hashing.add_argument('-sha1', '--sha1', action="store_true", help="Use sha1 hash algorithmn")

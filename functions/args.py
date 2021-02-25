@@ -48,6 +48,9 @@ def action(mode):
     if mode.base64:
         result = encoding.b64(data)
     
+    if mode.hex:
+        result = encoding.hex(data)
+
     # Encryption
     if mode.key is not None:
         key = mode.key.encode('utf-8')

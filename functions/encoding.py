@@ -14,3 +14,7 @@ def b32(plainText):
 def b64(plainText):
 
     return base64.b64encode(plainText)
+
+def hex(plainText):
+
+    return plainText.hex().encode('utf8')
