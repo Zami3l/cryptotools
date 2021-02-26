@@ -11,16 +11,31 @@ def action(mode):
 
     # Input
     if mode.input is not None:
-        
         data = mode.input.encode('utf8')
        
     elif mode.file is not None:
-
         data = tools.read(mode.file)
     
     elif mode.pwd:
-
         data = getpass.getpass("> ").encode('utf-8')
+
+    # Uppercase
+    mode.type = mode.type.upper()
+
+    # Encoding Input
+    if mode.type == 'D':
+
+        if mode.base16:
+            data = encoding.b16(mode.type, data)
+        
+        if mode.base32:
+            data = encoding.b32(mode.type, data)
+
+        if mode.base64:
+            data = encoding.b64(mode.type, data)
+        
+        if mode.hex:
+            data = encoding.hex(mode.type, data)
 
     # Encryption
     if mode.key is not None:
@@ -34,18 +49,18 @@ def action(mode):
             missing('caesar', '--shift NUMBER')
         else:
             if mode.caesar == 'letter':
-                data = encryption.Shift_Cipher().ascii_letter(data, mode.shift, mode.repeat)
+                data = encryption.Shift_Cipher().ascii_letter(mode.type, data, mode.shift, mode.repeat)
             if mode.caesar == 'ascii':
-                data = encryption.Shift_Cipher().ascii_extented(data, mode.shift, mode.repeat)
+                data = encryption.Shift_Cipher().ascii_extented(mode.type, data, mode.shift, mode.repeat)
     
     if mode.vigenere:
         if mode.key is None:
             missing('key', '-k, --key KEY')
         else:
             if mode.vigenere == 'letter':
-                data = encryption.Substitution_Cipher().ascii_letter(data, key)
+                data = encryption.Substitution_Cipher().ascii_letter(mode.type, data, key)
             if mode.vigenere == 'ascii':
-                data = encryption.Substitution_Cipher().ascii_extented(data, key)
+                data = encryption.Substitution_Cipher().ascii_extented(mode.type, data, key)
 
     if mode.xor:
         if mode.key is None:
@@ -57,7 +72,7 @@ def action(mode):
         if mode.key is None:
             missing('xor', '-k / --key KEY')
         else:
-            data = encryption.RC4().cipher(data, key)
+            data = encryption.RC4().cipher(mode.type, data, key)
 
     # Hashing
     if mode.sha1:
@@ -75,30 +90,32 @@ def action(mode):
     if mode.custom:
         data = hashing_custom.Hash_Custom("functions/conf.toml").exec(data)
     
-    # Encoding
-    if mode.base16:
-        data = encoding.b16(data)
-    
-    if mode.base32:
-        data = encoding.b32(data)
+    # Encoding Output
+    if mode.type == 'E':
 
-    if mode.base64:
-        data = encoding.b64(data)
-    
-    if mode.hex:
-        data = encoding.hex(data)
+        if mode.base16:
+            data = encoding.b16(mode.type, data)
+        
+        if mode.base32:
+            data = encoding.b32(mode.type, data)
+
+        if mode.base64:
+            data = encoding.b64(mode.type, data)
+        
+        if mode.hex:
+            data = encoding.hex(mode.type, data)
 
     # View data
     if mode.view:
         # Uppercase data
         if mode.upper:
-            print(data.decode('utf8').upper())
+            print(data.decode('utf8', 'ignore').upper())
         else:
-            print(data.decode('utf8'))
+            print(data.decode('utf8', 'ignore'))
 
     # Copy data
     if mode.clip:
-        clipboard.copy(data.decode('utf8'))
+        clipboard.copy(data.decode('utf8', 'ignore'))
 
     # Output
     if mode.output is not None:

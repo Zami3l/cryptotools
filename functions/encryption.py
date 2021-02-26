@@ -6,7 +6,7 @@ from functions.tools import letter_position, case_letter
 
 class Shift_Cipher:
 
-    def ascii_letter(self, plainText, shift, repetition):
+    def ascii_letter(self, mode, plainText, shift, repetition):
 
         for index in range(repetition):
 
@@ -16,11 +16,18 @@ class Shift_Cipher:
                 
                 #Lowercase
                 if ror.islower():
-                    cipherText.append(chr((ord(ror)+(shift+index)-97)%26+97))
+                    if mode == 'E':
+                        cipherText.append(chr((ord(ror)+(shift+index)-97)%26+97))
+                    elif mode == 'D':
+                        cipherText.append(chr((ord(ror)-(shift+index)-97)%26+97))
 
                 #Uppercase
                 elif ror.isupper():
-                    cipherText.append(chr((ord(ror)+(shift+index)-65)%26+65))
+                    if mode == 'E':
+                        cipherText.append(chr((ord(ror)+(shift+index)-65)%26+65))
+                    elif mode == 'D':
+                        cipherText.append(chr((ord(ror)-(shift+index)-65)%26+65))
+
 
                 #If other, none shift
                 else:
@@ -30,7 +37,7 @@ class Shift_Cipher:
 
         return ''.join(cipherText).encode('utf-8')
 
-    def ascii_extented(self, plainText, shift, repetition):
+    def ascii_extented(self, mode, plainText, shift, repetition):
         
         for index in range(repetition):
 
@@ -38,7 +45,11 @@ class Shift_Cipher:
 
             for ror in plainText.decode('utf-8'):
 
-                cipherText.append(chr((ord(ror)+(shift+index))%256))
+                if mode == 'E':
+                    cipherText.append(chr((ord(ror)+(shift+index))%256))
+                elif mode == 'D':
+                    cipherText.append(chr((ord(ror)-(shift+index))%256))
+
 
             logging.info('#%d : %s', index+1, ''.join(cipherText))
 
@@ -59,14 +70,18 @@ class Xor_Cipher():
 
 class Substitution_Cipher():
 
-    def ascii_letter(self, plainText, key):
+    def ascii_letter(self, mode, plainText, key):
 
         cipherText = bytearray()
         iShift, iKey = 0, 0 # Si le plainText contient un caractère spécial il faut revenir à l'index précédent
 
         for iLetter in plainText:
 
-            shiftLetter = (letter_position(iLetter) + letter_position(key[(iKey - iShift) % len(key)])) % 26
+            if mode == 'E':
+                shiftLetter = (letter_position(iLetter) + letter_position(key[(iKey - iShift) % len(key)])) % 26
+            else:
+                shiftLetter = (letter_position(iLetter) - letter_position(key[(iKey - iShift) % len(key)])) % 26
+
 
             if case_letter(iLetter) == 'lowercase':
 
@@ -120,13 +135,13 @@ class RC4():
 
             yield K
 
-    def cipher(self, plainText, key):
+    def cipher(self, mode, plainText, key):
 
         keystream = self.PRGA(self.KSA(key))
-        result = bytearray(plainText)
+        result = bytearray()
 
-        for index in range(len(plainText)):
+        for index in plainText:
 
-            result[index] ^= next(keystream)
-        
+            result.append(index ^ next(keystream))
+
         return result

@@ -3,18 +3,35 @@
 
 import base64
 
-def b16(plainText):
+def b16(mode, plainText):
+
+    if mode == 'E':
+        return base64.b16encode(plainText)
+
+    elif mode == 'D':
+        return base64.b16decode(plainText)
     
-    return base64.b16encode(plainText)
 
-def b32(plainText):
+def b32(mode, plainText):
     
-    return base64.b32encode(plainText)
+    if mode == 'E':
+        return base64.b32encode(plainText)
 
-def b64(plainText):
+    elif mode == 'D':
+        return base64.b32decode(plainText)
 
-    return base64.b64encode(plainText)
+def b64(mode, plainText):
 
-def hex(plainText):
+    if mode == 'E':
+        return base64.b64encode(plainText)
 
-    return plainText.hex().encode('utf8')
+    elif mode == 'D':
+        return base64.b64decode(plainText)
+
+def hex(mode, plainText):
+
+    if mode == 'E':
+        return plainText.hex().encode('utf8')
+
+    elif mode == 'D':
+        return bytes.fromhex(plainText.decode('utf8'))
