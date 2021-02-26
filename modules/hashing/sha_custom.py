@@ -4,7 +4,7 @@
 import hashlib
 import toml
 
-class Hash_Custom:
+class Sha_Custom:
     
     def __init__(self, fileConf):
         self.param = toml.load(fileConf)

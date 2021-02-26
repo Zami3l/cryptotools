@@ -3,7 +3,7 @@
 
 import argparse, logging, sys
 import clipboard
-from functions import args 
+from modules.libs.args import args_action
 
 def check_args(_agrs=None):
     
@@ -68,7 +68,7 @@ def main():
         logger.setLevel(logging.DEBUG)
 
     # Run
-    args.action(sysargs)
+    args_action(sysargs)
 
 
 if __name__ == "__main__":

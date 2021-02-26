@@ -14,7 +14,3 @@ def sha256(plainText):
 def sha512(plainText):
     
     return hashlib.sha512(plainText).hexdigest().encode('utf8')
-
-def md5(plainText):
-    
-    return hashlib.md5(plainText).hexdigest().encode('utf8')

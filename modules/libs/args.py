@@ -2,12 +2,24 @@
 # coding : utf-8
 
 import sys, unittest
-from functions import hashing, hashing_custom, encoding, encryption, tools 
+
+from modules.encoding.base import b16, b32, b64, hex
+
+from modules.encryption.rc4 import RC4
+from modules.encryption.shift_cipher import Shift_Cipher
+from modules.encryption.substitution_cipher import Substitution_Cipher
+from modules.encryption.xor_cipher import Xor_Cipher
+
+from modules.hashing.sha import sha1, sha256, sha512
+from modules.hashing.md import md5
+from modules.hashing.sha_custom import Sha_Custom
+
 import getpass
-from functions.color import red
+
+from modules.libs.color import red
 from colored import stylize
 
-def action(mode):
+def args_action(mode):
 
     # Input
     if mode.input is not None:
@@ -26,84 +38,84 @@ def action(mode):
     if mode.type == 'D':
 
         if mode.base16:
-            data = encoding.b16(mode.type, data)
+            data = b16(mode.type, data)
         
         if mode.base32:
-            data = encoding.b32(mode.type, data)
+            data = b32(mode.type, data)
 
         if mode.base64:
-            data = encoding.b64(mode.type, data)
+            data = b64(mode.type, data)
         
         if mode.hex:
-            data = encoding.hex(mode.type, data)
+            data = hex(mode.type, data)
 
     # Encryption
     if mode.key is not None:
         key = mode.key.encode('utf-8')
 
     if mode.rot13:
-        data = encryption.Shift_Cipher().ascii_letter(data, 13, 1)
+        data = Shift_Cipher().ascii_letter(data, 13, 1)
 
     if mode.caesar:
         if mode.shift is None:
             missing('caesar', '--shift NUMBER')
         else:
             if mode.caesar == 'letter':
-                data = encryption.Shift_Cipher().ascii_letter(mode.type, data, mode.shift, mode.repeat)
+                data = Shift_Cipher().ascii_letter(mode.type, data, mode.shift, mode.repeat)
             if mode.caesar == 'ascii':
-                data = encryption.Shift_Cipher().ascii_extented(mode.type, data, mode.shift, mode.repeat)
+                data = Shift_Cipher().ascii_extented(mode.type, data, mode.shift, mode.repeat)
     
     if mode.vigenere:
         if mode.key is None:
             missing('key', '-k, --key KEY')
         else:
             if mode.vigenere == 'letter':
-                data = encryption.Substitution_Cipher().ascii_letter(mode.type, data, key)
+                data = Substitution_Cipher().ascii_letter(mode.type, data, key)
             if mode.vigenere == 'ascii':
-                data = encryption.Substitution_Cipher().ascii_extented(mode.type, data, key)
+                data = Substitution_Cipher().ascii_extented(mode.type, data, key)
 
     if mode.xor:
         if mode.key is None:
             missing('xor', '-k / --key KEY')
         else:
-            data = encryption.Xor_Cipher().xor(data, key)
+            data = Xor_Cipher().xor(data, key)
 
     if mode.rc4:
         if mode.key is None:
             missing('xor', '-k / --key KEY')
         else:
-            data = encryption.RC4().cipher(mode.type, data, key)
+            data = RC4().cipher(mode.type, data, key)
 
     # Hashing
     if mode.sha1:
-        data = hashing.sha1(data)
+        data = sha1(data)
     
     if mode.sha256:
-        data = hashing.sha256(data)
+        data = sha256(data)
 
     if mode.sha512:
-        data = hashing.sha512(data)
+        data = sha512(data)
     
     if mode.md5:
-        data = hashing.md5(data)
+        data = md5(data)
     
     if mode.custom:
-        data = hashing_custom.Hash_Custom("functions/conf.toml").exec(data)
+        data = Sha_Custom("functions/conf.toml").exec(data)
     
     # Encoding Output
     if mode.type == 'E':
 
         if mode.base16:
-            data = encoding.b16(mode.type, data)
+            data = b16(mode.type, data)
         
         if mode.base32:
-            data = encoding.b32(mode.type, data)
+            data = b32(mode.type, data)
 
         if mode.base64:
-            data = encoding.b64(mode.type, data)
+            data = b64(mode.type, data)
         
         if mode.hex:
-            data = encoding.hex(mode.type, data)
+            data = hex(mode.type, data)
 
     # View data
     if mode.view:
