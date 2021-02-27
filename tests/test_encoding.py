@@ -10,16 +10,28 @@ class Test_Encoding(unittest.TestCase):
 
     def test_b16(self):
 
-        self.assertEqual(b16('E' ,self.plainText), b'5A616D69336C')
+        encodeText = b16('E' ,self.plainText)
+        self.assertEqual(encodeText, b'5A616D69336C')
+        decodeText = b16('D' , encodeText)
+        self.assertEqual(decodeText, self.plainText)
 
     def test_b32(self):
 
-        self.assertEqual(b32('E' ,self.plainText), b'LJQW22JTNQ======')
+        encodeText = b32('E' ,self.plainText)
+        self.assertEqual(encodeText, b'LJQW22JTNQ======')
+        decodeText = b32('D' ,encodeText)
+        self.assertEqual(decodeText, self.plainText)
 
     def test_b64(self):
 
-        self.assertEqual(b64('E' ,self.plainText), b'WmFtaTNs')
+        encodeText = b64('E' ,self.plainText)
+        self.assertEqual(encodeText, b'WmFtaTNs')
+        decodeText = b64('D' ,encodeText)
+        self.assertEqual(decodeText, self.plainText)
 
     def test_hex(self):
 
-        self.assertEqual(hex('E' ,self.plainText), b'5a616d69336c')
+        encodeText = hex('E' ,self.plainText)
+        self.assertEqual(encodeText, b'5a616d69336c')
+        decodeText = hex('D' ,encodeText)
+        self.assertEqual(decodeText, self.plainText)
