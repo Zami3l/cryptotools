@@ -3,6 +3,8 @@
 
 import sys, unittest
 
+from modules.libs.files import read, write
+
 from modules.encoding.base import b16, b32, b64, hex
 
 from modules.encryption.rc4 import RC4
@@ -26,7 +28,7 @@ def args_action(mode):
         data = mode.input.encode('utf8')
        
     elif mode.file is not None:
-        data = tools.read(mode.file)
+        data = read(mode.file)
     
     elif mode.pwd:
         data = getpass.getpass("> ").encode('utf-8')
@@ -131,7 +133,7 @@ def args_action(mode):
 
     # Output
     if mode.output is not None:
-        tools.write(data, mode.output)
+        write(data, mode.output)
 
     if mode.test:
         suite = unittest.TestLoader().discover("tests")

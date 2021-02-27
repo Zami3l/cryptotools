@@ -19,11 +19,11 @@ class Substitution_Cipher():
                 shiftLetter = (letter_position(iLetter) - letter_position(key[(iKey - iShift) % len(key)])) % 26
 
 
-            if case_letter(iLetter) == 'lowercase':
+            if letter_case(iLetter) == 'lowercase':
 
                 cipherText.append(shiftLetter + 97)
 
-            elif case_letter(iLetter) == 'uppercase':
+            elif letter_case(iLetter) == 'uppercase':
 
                 cipherText.append(shiftLetter + 65)
 

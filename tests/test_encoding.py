@@ -2,7 +2,7 @@
 # coding : utf-8
 
 import unittest
-from functions import encoding
+from modules.encoding.base import b16, b32, b64, hex
 
 class Test_Encoding(unittest.TestCase):
 
@@ -10,16 +10,16 @@ class Test_Encoding(unittest.TestCase):
 
     def test_b16(self):
 
-        self.assertEqual(encoding.b16(self.plainText), b'5A616D69336C')
+        self.assertEqual(b16('E' ,self.plainText), b'5A616D69336C')
 
     def test_b32(self):
 
-        self.assertEqual(encoding.b32(self.plainText), b'LJQW22JTNQ======')
+        self.assertEqual(b32('E' ,self.plainText), b'LJQW22JTNQ======')
 
     def test_b64(self):
 
-        self.assertEqual(encoding.b64(self.plainText), b'WmFtaTNs')
+        self.assertEqual(b64('E' ,self.plainText), b'WmFtaTNs')
 
     def test_hex(self):
 
-        self.assertEqual(encoding.hex(self.plainText), b'5a616d69336c')
+        self.assertEqual(hex('E' ,self.plainText), b'5a616d69336c')
