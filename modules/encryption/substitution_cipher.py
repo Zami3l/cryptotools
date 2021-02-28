@@ -15,22 +15,34 @@ class Substitution_Cipher():
 
             if mode == 'E':
                 shiftLetter = (letter_position(iLetter) + letter_position(key[(iKey - iShift) % len(key)])) % 26
-            else:
+            elif mode == 'D':
                 shiftLetter = (letter_position(iLetter) - letter_position(key[(iKey - iShift) % len(key)])) % 26
 
-
             if letter_case(iLetter) == 'lowercase':
-
                 cipherText.append(shiftLetter + 97)
 
             elif letter_case(iLetter) == 'uppercase':
-
                 cipherText.append(shiftLetter + 65)
 
             else:
-
                 cipherText.append(iLetter)
                 iShift += 1
+
+            iKey += 1
+
+        return cipherText
+
+    def ascii_extented(self, mode, plainText, key):
+
+        cipherText = bytearray()
+        iShift, iKey = 0, 0 # Si le plainText contient un caractère spécial il faut revenir à l'index précédent
+
+        for iLetter in plainText:
+
+            if mode == 'E':
+                cipherText.append((iLetter + key[iKey % len(key)]) % 256)
+            elif mode == 'D':
+                cipherText.append((iLetter - key[iKey  % len(key)]) % 256)
 
             iKey += 1
 
