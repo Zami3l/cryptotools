@@ -15,13 +15,19 @@ class Test_Encryption(unittest.TestCase):
 
     def test_shift_cipher(self):
         
-        cipherText = Shift_Cipher().ascii_letter('E' ,self.plainText, 8, 3).decode('utf8')
-        self.assertEqual(cipherText, "Rs drobo, S'w Jkws3v")
+        cipherText = Shift_Cipher().ascii_letter('E', self.plainText, 8, 3)
+        self.assertEqual(cipherText.decode('utf8'), "Rs drobo, S'w Jkws3v")
+        plainText = Shift_Cipher().ascii_letter('D', cipherText, 8, 3)
+        self.assertEqual(plainText, self.plainText)
 
-        cipherText = Shift_Cipher().ascii_extented('E' ,self.plainText, 8, 3).decode('utf8')
-        self.assertEqual(cipherText, "Rs*~ro|o6*S1w*dkws=v")
+        cipherText = Shift_Cipher().ascii_extented('E' ,self.plainText, 8, 3)
+        self.assertEqual(cipherText.decode('utf8'), "Rs*~ro|o6*S1w*dkws=v")
+        plainText = Shift_Cipher().ascii_extented('D', cipherText, 8, 3)
+        self.assertEqual(plainText, self.plainText)
 
     def test_substitution_cipher(self):
         
-        cipherText = Substitution_Cipher().ascii_letter('E' ,self.plainText, self.key).decode('utf8')
-        self.assertEqual(cipherText, "Gi fpecd, I'y Haxh3l")
+        cipherText = Substitution_Cipher().ascii_letter('E', self.plainText, self.key)
+        self.assertEqual(cipherText.decode('utf8'), "Gi fpecd, I'y Haxh3l")
+        plainText = Substitution_Cipher().ascii_letter('D', cipherText, self.key)
+        self.assertEqual(plainText, self.plainText)
