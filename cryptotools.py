@@ -2,7 +2,6 @@
 # coding : utf-8
 
 import argparse, logging, sys
-import clipboard
 from modules.libs.args import args_action
 
 def check_args(_agrs=None):

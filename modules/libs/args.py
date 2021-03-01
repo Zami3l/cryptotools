@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # coding : utf-8
 
-import sys, unittest
+import sys, unittest, clipboard
 
 from modules.libs.files import read, write
 
