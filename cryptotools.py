@@ -33,6 +33,7 @@ def check_args(_agrs=None):
     encryption.add_argument('-rot13', '--rot13', action="store_true", help="Encryption ROT13")
     encryption.add_argument('-caesar', '--caesar', metavar='TYPE', choices=['letter', 'ascii'], help="Encryption Caesar (Select letter or ascii)")
     encryption.add_argument('-vigenere', '--vigenere', metavar='TYPE', choices=['letter', 'ascii'], help="Encryption Vigenere (Select letter or ascii)")
+    encryption.add_argument('-polybe', '--polybe', action="store_true", help="Encryption Polybe")
     encryption.add_argument('-xor', '--xor', action="store_true", help="Encryption xor")
     encryption.add_argument('-rc4', '--rc4', action="store_true", help="Encryption RC4")
 
@@ -40,6 +41,7 @@ def check_args(_agrs=None):
     encryption_sub.add_argument('-k', '--key', metavar='KEY', help="Key for encryption")
     encryption_sub.add_argument('-shift', '--shift', metavar='NUMBER', type=int, help="Number for shift")
     encryption_sub.add_argument('-repeat', '--repeat', metavar='NUMBER', type=int, default=1, help="Number for repetition shift")
+    encryption_sub.add_argument('-perm', '--permutation', action="store_true", help="Permutation for polybe")
 
     optional = parser.add_argument_group(title='Other')
     optional.add_argument('-t', '--test', action="store_true", help="Run unit testing")

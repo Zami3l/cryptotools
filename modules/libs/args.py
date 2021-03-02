@@ -10,6 +10,7 @@ from modules.encoding.base import b16, b32, b64, hex
 from modules.encryption.rc4 import RC4
 from modules.encryption.shift_cipher import Shift_Cipher
 from modules.encryption.substitution_cipher import Substitution_Cipher
+from modules.encryption.substitution_square import Substitution_Square
 from modules.encryption.xor_cipher import Xor_Cipher
 
 from modules.hashing.sha import sha1, sha256, sha512
@@ -75,6 +76,12 @@ def args_action(mode):
                 data = Substitution_Cipher().ascii_letter(mode.type, data, key)
             if mode.vigenere == 'ascii':
                 data = Substitution_Cipher().ascii_extented(mode.type, data, key)
+
+    if mode.polybe:
+        if mode.key is None:
+            missing('key', '-k, --key KEY')
+        else:
+            data = Substitution_Square().ascii_letter(mode.type, mode.permutation, data, key)
 
     if mode.xor:
         if mode.key is None:
